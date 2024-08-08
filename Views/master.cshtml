@@ -1,0 +1,22 @@
+﻿@{ 
+    Layout = null;
+
+    var currentCulture = Thread.CurrentThread.CurrentCulture;
+    var language = currentCulture.Name;
+
+}
+<!DOCTYPE html>
+<html lang="@language">
+<head>
+	<partial name="Head" model="Model"/>
+</head>
+<body>
+	<partial name="header" />
+	<partial name="breadcrumb"/>
+    <main>
+        @RenderBody()
+    </main>
+ 	<partial name="footer"/>
+    <qc-up></qc-up>
+</body>
+</html>

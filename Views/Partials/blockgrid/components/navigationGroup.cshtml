@@ -1,0 +1,32 @@
+﻿@inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage<Umbraco.Cms.Core.Models.Blocks.BlockGridItem<ContentModels.NavigationGroup>>
+@inject IUmbracoContextAccessor UmbracoContextAccessor
+
+@{
+    // Récupérer l'URL de la page courante
+    var currentUrl = UmbracoContextAccessor.GetRequiredUmbracoContext().PublishedRequest.PublishedContent.Url();
+    bool isActive = Model.Content.Link.Url == currentUrl;
+}
+
+<li role="none">
+    <a 
+        role="menuitem" 
+        target="@Model.Content.Link.Target" 
+        href="@Model.Content.Link.Url" 
+        @(isActive ? "aria-current=\"page\"" : null)>
+            @Model.Content.Link.Name
+    </a>
+    @if(Model.Content.ChildLinks != null && Model.Content.ChildLinks.Any())
+    {
+        <button>
+            <span class="lnr lnr-chevron-down"></span>
+        </button>
+        <ul class="submenu">
+            @foreach (var childLink in Model.Content.ChildLinks)
+            {
+                <li><a class="dropdown-item" target="@childLink.Target" href="@childLink.Url">@childLink.Name</a></li>
+            }
+        </ul>
+
+    }
+</li>
+
