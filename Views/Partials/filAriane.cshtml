@@ -7,17 +7,17 @@
 
 @{
     var umbracoContext = UmbracoContextAccessor.GetRequiredUmbracoContext();
-    var rootNode = umbracoContext.Content.GetAtRoot().FirstOrDefault();
-    var CurrentPage = umbracoContext.PublishedRequest.PublishedContent;
+    var rootNode = umbracoContext?.Content?.GetAtRoot().FirstOrDefault();
+    var CurrentPage = umbracoContext?.PublishedRequest?.PublishedContent;
 }
 
-@if (CurrentPage.Ancestors().Any())
+@if (CurrentPage != null && CurrentPage.Ancestors().Any())
 {
     <qc-ariane >
         <ol>
-            @foreach (var bpage in CurrentPage.Ancestors().OrderBy(x => x.Level))
+            @foreach (var lien in CurrentPage.Ancestors().OrderBy(x => x.Level))
             {
-                <li><a href="@bpage.Url()">@bpage.Name</a></li>
+                <li><a href="@lien.Url()">@lien.Name</a></li>
             }
             <li aria-current="page">@CurrentPage.Name</li>
         </ol>

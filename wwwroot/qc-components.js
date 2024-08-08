@@ -628,7 +628,7 @@ class L extends HTMLElement {
         t.preventDefault(), this.toggleSubmenu(s);
       });
     }), document.addEventListener("click", (s) => {
-      const t = this.contains(s.target) || s.target.closest(".qc-navigation"), i = s.target.closest("button, a");
+      const t = this.contains(s.target) || s.target.closest("qc-navigation"), i = s.target.closest("button, a");
       (!t || t && !i) && this.closeAllSubmenus();
     }), document.addEventListener("keydown", (s) => {
       s.key === "Escape" && this.closeAllSubmenus();
@@ -698,7 +698,7 @@ class L extends HTMLElement {
         `;
   }
 }
-customElements.get(".qc-navigation") || customElements.define(".qc-navigation", L);
+customElements.get("qc-navigation") || customElements.define("qc-navigation", L);
 class M extends HTMLElement {
   static get observedAttributes() {
     return ["arialabel"];
