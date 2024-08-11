@@ -10,11 +10,11 @@ namespace SiteWeb.Extensions
             return publishedContent.AncestorOrSelf<Accueil>();
         }
 
-        public static ParametresGlobaux? GetParametresGlobaux(this IPublishedContent publishedContent)
+        public static Preferences? GetPreferences(this IPublishedContent publishedContent)
         {
             var accueil = GetAccueil(publishedContent);
             if (accueil == null) return null;
-            return accueil.FirstChild<ParametresGlobaux>();
+            return accueil.FirstChild<Preferences>();
         }
     }
 }

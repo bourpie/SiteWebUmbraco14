@@ -18,14 +18,24 @@ using Umbraco.Extensions;
 
 namespace Umbraco.Cms.Web.Common.PublishedModels
 {
-	/// <summary>Paramètres globaux</summary>
-	[PublishedModel("parametresGlobaux")]
-	public partial class ParametresGlobaux : PublishedContentModel, INavigationProps, IParametresProps, IPiedDePageProps
+	// Mixin Content Type with alias "titreDuBlocComposition"
+	/// <summary>Titre du bloc</summary>
+	public partial interface ITitreDuBlocComposition : IPublishedElement
+	{
+		/// <summary>Titre du bloc</summary>
+		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder.Embedded", "14.1.1+eb4fc97")]
+		[global::System.Diagnostics.CodeAnalysis.MaybeNull]
+		string TitreDuBloc { get; }
+	}
+
+	/// <summary>Titre du bloc</summary>
+	[PublishedModel("titreDuBlocComposition")]
+	public partial class TitreDuBlocComposition : PublishedElementModel, ITitreDuBlocComposition
 	{
 		// helpers
 #pragma warning disable 0109 // new is redundant
 		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder.Embedded", "14.1.1+eb4fc97")]
-		public new const string ModelTypeAlias = "parametresGlobaux";
+		public new const string ModelTypeAlias = "titreDuBlocComposition";
 		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder.Embedded", "14.1.1+eb4fc97")]
 		public new const PublishedItemType ModelItemType = PublishedItemType.Content;
 		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder.Embedded", "14.1.1+eb4fc97")]
@@ -34,14 +44,14 @@ namespace Umbraco.Cms.Web.Common.PublishedModels
 			=> PublishedModelUtility.GetModelContentType(publishedSnapshotAccessor, ModelItemType, ModelTypeAlias);
 		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder.Embedded", "14.1.1+eb4fc97")]
 		[return: global::System.Diagnostics.CodeAnalysis.MaybeNull]
-		public static IPublishedPropertyType GetModelPropertyType<TValue>(IPublishedSnapshotAccessor publishedSnapshotAccessor, Expression<Func<ParametresGlobaux, TValue>> selector)
+		public static IPublishedPropertyType GetModelPropertyType<TValue>(IPublishedSnapshotAccessor publishedSnapshotAccessor, Expression<Func<TitreDuBlocComposition, TValue>> selector)
 			=> PublishedModelUtility.GetModelPropertyType(GetModelContentType(publishedSnapshotAccessor), selector);
 #pragma warning restore 0109
 
 		private IPublishedValueFallback _publishedValueFallback;
 
 		// ctor
-		public ParametresGlobaux(IPublishedContent content, IPublishedValueFallback publishedValueFallback)
+		public TitreDuBlocComposition(IPublishedElement content, IPublishedValueFallback publishedValueFallback)
 			: base(content, publishedValueFallback)
 		{
 			_publishedValueFallback = publishedValueFallback;
@@ -50,27 +60,16 @@ namespace Umbraco.Cms.Web.Common.PublishedModels
 		// properties
 
 		///<summary>
-		/// Navigation
+		/// Titre du bloc
 		///</summary>
 		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder.Embedded", "14.1.1+eb4fc97")]
 		[global::System.Diagnostics.CodeAnalysis.MaybeNull]
-		[ImplementPropertyType("navigation")]
-		public virtual global::Umbraco.Cms.Core.Models.Blocks.BlockListModel Navigation => global::Umbraco.Cms.Web.Common.PublishedModels.NavigationProps.GetNavigation(this, _publishedValueFallback);
+		[ImplementPropertyType("titreDuBloc")]
+		public virtual string TitreDuBloc => GetTitreDuBloc(this, _publishedValueFallback);
 
-		///<summary>
-		/// Nom du site
-		///</summary>
+		/// <summary>Static getter for Titre du bloc</summary>
 		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder.Embedded", "14.1.1+eb4fc97")]
-		[global::System.Diagnostics.CodeAnalysis.MaybeNull]
-		[ImplementPropertyType("nomDuSite")]
-		public virtual string NomDuSite => global::Umbraco.Cms.Web.Common.PublishedModels.ParametresProps.GetNomDuSite(this, _publishedValueFallback);
-
-		///<summary>
-		/// Pied de page
-		///</summary>
-		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder.Embedded", "14.1.1+eb4fc97")]
-		[global::System.Diagnostics.CodeAnalysis.MaybeNull]
-		[ImplementPropertyType("piedDePage")]
-		public virtual string PiedDePage => global::Umbraco.Cms.Web.Common.PublishedModels.PiedDePageProps.GetPiedDePage(this, _publishedValueFallback);
+		[return: global::System.Diagnostics.CodeAnalysis.MaybeNull]
+		public static string GetTitreDuBloc(ITitreDuBlocComposition that, IPublishedValueFallback publishedValueFallback) => that.Value<string>(publishedValueFallback, "titreDuBloc");
 	}
 }

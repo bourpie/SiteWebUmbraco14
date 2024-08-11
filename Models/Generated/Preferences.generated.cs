@@ -18,14 +18,14 @@ using Umbraco.Extensions;
 
 namespace Umbraco.Cms.Web.Common.PublishedModels
 {
-	/// <summary>Liens</summary>
-	[PublishedModel("liens")]
-	public partial class Liens : PublishedElementModel
+	/// <summary>Préférences</summary>
+	[PublishedModel("preferences")]
+	public partial class Preferences : PublishedContentModel
 	{
 		// helpers
 #pragma warning disable 0109 // new is redundant
 		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder.Embedded", "14.1.1+eb4fc97")]
-		public new const string ModelTypeAlias = "liens";
+		public new const string ModelTypeAlias = "preferences";
 		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder.Embedded", "14.1.1+eb4fc97")]
 		public new const PublishedItemType ModelItemType = PublishedItemType.Content;
 		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder.Embedded", "14.1.1+eb4fc97")]
@@ -34,14 +34,14 @@ namespace Umbraco.Cms.Web.Common.PublishedModels
 			=> PublishedModelUtility.GetModelContentType(publishedSnapshotAccessor, ModelItemType, ModelTypeAlias);
 		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder.Embedded", "14.1.1+eb4fc97")]
 		[return: global::System.Diagnostics.CodeAnalysis.MaybeNull]
-		public static IPublishedPropertyType GetModelPropertyType<TValue>(IPublishedSnapshotAccessor publishedSnapshotAccessor, Expression<Func<Liens, TValue>> selector)
+		public static IPublishedPropertyType GetModelPropertyType<TValue>(IPublishedSnapshotAccessor publishedSnapshotAccessor, Expression<Func<Preferences, TValue>> selector)
 			=> PublishedModelUtility.GetModelPropertyType(GetModelContentType(publishedSnapshotAccessor), selector);
 #pragma warning restore 0109
 
 		private IPublishedValueFallback _publishedValueFallback;
 
 		// ctor
-		public Liens(IPublishedElement content, IPublishedValueFallback publishedValueFallback)
+		public Preferences(IPublishedContent content, IPublishedValueFallback publishedValueFallback)
 			: base(content, publishedValueFallback)
 		{
 			_publishedValueFallback = publishedValueFallback;
@@ -50,27 +50,51 @@ namespace Umbraco.Cms.Web.Common.PublishedModels
 		// properties
 
 		///<summary>
-		/// Lien
+		/// Navigation
 		///</summary>
 		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder.Embedded", "14.1.1+eb4fc97")]
 		[global::System.Diagnostics.CodeAnalysis.MaybeNull]
-		[ImplementPropertyType("lien")]
-		public virtual global::Umbraco.Cms.Core.Models.Link Lien => this.Value<global::Umbraco.Cms.Core.Models.Link>(_publishedValueFallback, "lien");
+		[ImplementPropertyType("navigation")]
+		public virtual global::Umbraco.Cms.Core.Models.Blocks.BlockListModel Navigation => this.Value<global::Umbraco.Cms.Core.Models.Blocks.BlockListModel>(_publishedValueFallback, "navigation");
 
 		///<summary>
-		/// Liste de liens
+		/// Nom du site
 		///</summary>
 		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder.Embedded", "14.1.1+eb4fc97")]
 		[global::System.Diagnostics.CodeAnalysis.MaybeNull]
-		[ImplementPropertyType("listeDeLiens")]
-		public virtual global::System.Collections.Generic.IEnumerable<global::Umbraco.Cms.Core.Models.Link> ListeDeLiens => this.Value<global::System.Collections.Generic.IEnumerable<global::Umbraco.Cms.Core.Models.Link>>(_publishedValueFallback, "listeDeLiens");
+		[ImplementPropertyType("nomDuSite")]
+		public virtual string NomDuSite => this.Value<string>(_publishedValueFallback, "nomDuSite");
 
 		///<summary>
-		/// Titre du bloc
+		/// Page contact
 		///</summary>
 		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder.Embedded", "14.1.1+eb4fc97")]
 		[global::System.Diagnostics.CodeAnalysis.MaybeNull]
-		[ImplementPropertyType("titreDuBloc")]
-		public virtual string TitreDuBloc => this.Value<string>(_publishedValueFallback, "titreDuBloc");
+		[ImplementPropertyType("pageContact")]
+		public virtual global::Umbraco.Cms.Core.Models.Link PageContact => this.Value<global::Umbraco.Cms.Core.Models.Link>(_publishedValueFallback, "pageContact");
+
+		///<summary>
+		/// Liens principaux
+		///</summary>
+		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder.Embedded", "14.1.1+eb4fc97")]
+		[global::System.Diagnostics.CodeAnalysis.MaybeNull]
+		[ImplementPropertyType("piedBlocLiensPrincipaux")]
+		public virtual global::Umbraco.Cms.Core.Models.Blocks.BlockListModel PiedBlocLiensPrincipaux => this.Value<global::Umbraco.Cms.Core.Models.Blocks.BlockListModel>(_publishedValueFallback, "piedBlocLiensPrincipaux");
+
+		///<summary>
+		/// Copyright
+		///</summary>
+		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder.Embedded", "14.1.1+eb4fc97")]
+		[global::System.Diagnostics.CodeAnalysis.MaybeNull]
+		[ImplementPropertyType("piedCopyright")]
+		public virtual global::Umbraco.Cms.Core.Models.Link PiedCopyright => this.Value<global::Umbraco.Cms.Core.Models.Link>(_publishedValueFallback, "piedCopyright");
+
+		///<summary>
+		/// Liens secondaires
+		///</summary>
+		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder.Embedded", "14.1.1+eb4fc97")]
+		[global::System.Diagnostics.CodeAnalysis.MaybeNull]
+		[ImplementPropertyType("piedLiensSecondaires")]
+		public virtual global::Umbraco.Cms.Core.Models.Blocks.BlockListModel PiedLiensSecondaires => this.Value<global::Umbraco.Cms.Core.Models.Blocks.BlockListModel>(_publishedValueFallback, "piedLiensSecondaires");
 	}
 }

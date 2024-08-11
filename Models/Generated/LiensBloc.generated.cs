@@ -18,24 +18,14 @@ using Umbraco.Extensions;
 
 namespace Umbraco.Cms.Web.Common.PublishedModels
 {
-	// Mixin Content Type with alias "piedDePageProps"
-	/// <summary>Pied de page</summary>
-	public partial interface IPiedDePageProps : IPublishedElement
-	{
-		/// <summary>Pied de page</summary>
-		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder.Embedded", "14.1.1+eb4fc97")]
-		[global::System.Diagnostics.CodeAnalysis.MaybeNull]
-		string PiedDePage { get; }
-	}
-
-	/// <summary>Pied de page</summary>
-	[PublishedModel("piedDePageProps")]
-	public partial class PiedDePageProps : PublishedElementModel, IPiedDePageProps
+	/// <summary>Liens</summary>
+	[PublishedModel("liensBloc")]
+	public partial class LiensBloc : PublishedElementModel
 	{
 		// helpers
 #pragma warning disable 0109 // new is redundant
 		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder.Embedded", "14.1.1+eb4fc97")]
-		public new const string ModelTypeAlias = "piedDePageProps";
+		public new const string ModelTypeAlias = "liensBloc";
 		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder.Embedded", "14.1.1+eb4fc97")]
 		public new const PublishedItemType ModelItemType = PublishedItemType.Content;
 		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder.Embedded", "14.1.1+eb4fc97")]
@@ -44,14 +34,14 @@ namespace Umbraco.Cms.Web.Common.PublishedModels
 			=> PublishedModelUtility.GetModelContentType(publishedSnapshotAccessor, ModelItemType, ModelTypeAlias);
 		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder.Embedded", "14.1.1+eb4fc97")]
 		[return: global::System.Diagnostics.CodeAnalysis.MaybeNull]
-		public static IPublishedPropertyType GetModelPropertyType<TValue>(IPublishedSnapshotAccessor publishedSnapshotAccessor, Expression<Func<PiedDePageProps, TValue>> selector)
+		public static IPublishedPropertyType GetModelPropertyType<TValue>(IPublishedSnapshotAccessor publishedSnapshotAccessor, Expression<Func<LiensBloc, TValue>> selector)
 			=> PublishedModelUtility.GetModelPropertyType(GetModelContentType(publishedSnapshotAccessor), selector);
 #pragma warning restore 0109
 
 		private IPublishedValueFallback _publishedValueFallback;
 
 		// ctor
-		public PiedDePageProps(IPublishedElement content, IPublishedValueFallback publishedValueFallback)
+		public LiensBloc(IPublishedElement content, IPublishedValueFallback publishedValueFallback)
 			: base(content, publishedValueFallback)
 		{
 			_publishedValueFallback = publishedValueFallback;
@@ -60,16 +50,27 @@ namespace Umbraco.Cms.Web.Common.PublishedModels
 		// properties
 
 		///<summary>
-		/// Pied de page
+		/// Lien
 		///</summary>
 		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder.Embedded", "14.1.1+eb4fc97")]
 		[global::System.Diagnostics.CodeAnalysis.MaybeNull]
-		[ImplementPropertyType("piedDePage")]
-		public virtual string PiedDePage => GetPiedDePage(this, _publishedValueFallback);
+		[ImplementPropertyType("lien")]
+		public virtual global::Umbraco.Cms.Core.Models.Link Lien => this.Value<global::Umbraco.Cms.Core.Models.Link>(_publishedValueFallback, "lien");
 
-		/// <summary>Static getter for Pied de page</summary>
+		///<summary>
+		/// Liens
+		///</summary>
 		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder.Embedded", "14.1.1+eb4fc97")]
-		[return: global::System.Diagnostics.CodeAnalysis.MaybeNull]
-		public static string GetPiedDePage(IPiedDePageProps that, IPublishedValueFallback publishedValueFallback) => that.Value<string>(publishedValueFallback, "piedDePage");
+		[global::System.Diagnostics.CodeAnalysis.MaybeNull]
+		[ImplementPropertyType("liens")]
+		public virtual global::System.Collections.Generic.IEnumerable<global::Umbraco.Cms.Core.Models.Link> Liens => this.Value<global::System.Collections.Generic.IEnumerable<global::Umbraco.Cms.Core.Models.Link>>(_publishedValueFallback, "liens");
+
+		///<summary>
+		/// Titre du bloc
+		///</summary>
+		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder.Embedded", "14.1.1+eb4fc97")]
+		[global::System.Diagnostics.CodeAnalysis.MaybeNull]
+		[ImplementPropertyType("titreDuBloc")]
+		public virtual string TitreDuBloc => this.Value<string>(_publishedValueFallback, "titreDuBloc");
 	}
 }

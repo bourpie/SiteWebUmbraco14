@@ -1,0 +1,41 @@
+﻿@inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage<Umbraco.Cms.Core.Models.Blocks.BlockListItem>
+@using ContentModels = Umbraco.Cms.Web.Common.PublishedModels
+@inject IUmbracoContextAccessor UmbracoContextAccessor
+
+@{
+    var content = (ContentModels.LiensBloc)Model.Content;
+    var urlActif = UmbracoContextAccessor?.GetRequiredUmbracoContext()?.PublishedRequest?.PublishedContent?.Url();
+
+    var lienPrincipalEstActif = content?.Lien != null && content.Lien.Url == urlActif;
+}
+
+@if (content?.Lien != null && !string.IsNullOrEmpty(content.Lien.Name))
+{
+    <li>
+        <a href="@content.Lien.Url" @(lienPrincipalEstActif ? "aria-current=\"page\"" : null)>
+            @content.Lien.Name
+        </a>
+
+        @if (content?.Liens != null && content.Liens.Any())
+        {
+            <button>
+                <span class="lnr lnr-chevron-down"></span>
+            </button>
+            <ul>
+                @foreach (var lien in content.Liens)
+                {
+                    var lienEstActif = lien.Url == urlActif;
+
+                    <li>
+                        <a href="@lien.Url" target="@lien.Target" @(lienEstActif ? "aria-current=\"page\"" : null)>
+                            @lien.Name
+                        </a>
+                    </li>
+                }
+            </ul>
+        }
+
+    </li>
+}
+
+
