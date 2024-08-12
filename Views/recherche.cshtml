@@ -9,6 +9,21 @@
 		<div class="col">
 
 			<h1 class="h1">@Model.SearchRequest?.Query</h1>
+
+			<p>@Model.SearchResponse?.TotalResultCount</p>
+
+			@if(Model.SearchResponse.HasResults)
+			{
+				<ul>
+				@foreach(var item in Model.SearchResponse.SearchResults)
+				{
+					var contentItem = Umbraco.Content(item.Id);
+					<li>
+						<a href="@contentItem.Url()">@contentItem.Name</a>
+					</li>
+				}
+				</ul>
+			}
 		</div>
 	</div>
 </div>
