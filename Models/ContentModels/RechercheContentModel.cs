@@ -11,6 +11,6 @@ namespace SiteWeb.Models.ContentModels
     {
         public SearchRequestModel? SearchRequest { get; set; }
         public SearchResponseModel? SearchResponse { get; set; }
-        public PaginatonViewModel? Paginaton { get; set; }
+        public PaginationViewModel? Paginaton { get; set; }
     }
 }

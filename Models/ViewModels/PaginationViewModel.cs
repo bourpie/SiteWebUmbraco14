@@ -1,6 +1,6 @@
 ﻿namespace SiteWeb.Models.ViewModels
 {
-	public class PaginatonViewModel
+	public class PaginationViewModel
 	{
 		public long TotalResults { get; set; }
 		public int ResultsPerPage { get; set; }

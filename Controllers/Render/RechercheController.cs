@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.ViewEngines;
+using SiteWeb.Helpers;
 using SiteWeb.Models.ContentModels;
 using SiteWeb.Models.Recherche;
 using SiteWeb.Models.ViewModels;
@@ -25,18 +26,19 @@ namespace SiteWeb.Controllers.Render
 
 			if (CurrentPage == null) return BadRequest();
 
-			var pageSize = 10;
+			var pageSize = 1;
 
 			var searchRequest = new SearchRequestModel(query, page, pageSize);
 
 			var searchResponse = searchService.Search(searchRequest);
 
-            var pagination = new PaginatonViewModel
+            var pagination = new PaginationViewModel
             {
                 TotalResults = searchResponse.TotalResultCount,
                 TotalPages = (int)Math.Ceiling((double)(searchResponse.TotalResultCount / searchRequest.PageSize)),
                 ResultsPerPage = searchRequest.PageSize,
-                CurrentPage = searchRequest.Page
+                CurrentPage = searchRequest.Page,
+                PaginationUrlFormat = PaginationHelper.GetPaginationUrlFormat(Request.Path, Request?.QueryString.ToString(), page)
             };
 
 			var model = new RechercheContentModel(CurrentPage)

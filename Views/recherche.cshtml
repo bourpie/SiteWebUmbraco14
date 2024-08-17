@@ -6,8 +6,11 @@
 <div class="container">
 	<div class="row">
 		<div class="col">
+			<h1 class="h1">Recherche</h1>
 			@await Component.InvokeAsync("SearchForm", Model?.SearchRequest)
 			@await Component.InvokeAsync("SearchResults", Model?.SearchResponse)
+
+			@await Component.InvokeAsync("Pagination", Model?.Paginaton)
 		</div>
 	</div>
 </div>
