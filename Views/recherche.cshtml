@@ -1,29 +1,13 @@
 ﻿@inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage<RechercheContentModel>
-
 @{
 	Layout = "master.cshtml";
-
 }
+
 <div class="container">
 	<div class="row">
 		<div class="col">
-
-			<h1 class="h1">@Model.SearchRequest?.Query</h1>
-
-			<p>@Model.SearchResponse?.TotalResultCount</p>
-
-			@if(Model.SearchResponse.HasResults)
-			{
-				<ul>
-				@foreach(var item in Model.SearchResponse.SearchResults)
-				{
-					var contentItem = Umbraco.Content(item.Id);
-					<li>
-						<a href="@contentItem.Url()">@contentItem.Name</a>
-					</li>
-				}
-				</ul>
-			}
+			@await Component.InvokeAsync("SearchForm", Model?.SearchRequest)
+			@await Component.InvokeAsync("SearchResults", Model?.SearchResponse)
 		</div>
 	</div>
 </div>

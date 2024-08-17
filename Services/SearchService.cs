@@ -1,6 +1,7 @@
 ﻿using Examine;
 using Examine.Search;
 using Lucene.Net.Analysis.Core;
+using SiteWeb.Extensions;
 using SiteWeb.Models.Recherche;
 using Umbraco.Cms.Infrastructure.Examine;
 using Umbraco.Cms.Web.Common.PublishedModels;
@@ -11,7 +12,10 @@ namespace SiteWeb.Services
 	public class SearchService : ISearchService
 	{
 		private readonly IExamineManager _examineManager;
-		private readonly string[] _docTypesToExclude = [Preferences.ModelTypeAlias];
+		private readonly string[] _docTypesToExclude = 
+			[
+				Preferences.ModelTypeAlias
+			];
 
 		public SearchService(IExamineManager examineManager) 
 		{ 
@@ -34,15 +38,31 @@ namespace SiteWeb.Services
 				.Where(x => !StopAnalyzer.ENGLISH_STOP_WORDS_SET.Contains(x.ToLower()) && x.Length > 2).ToArray() : null;
 
 			if(terms != null && terms.Length > 0) {
-				query!.And().Group(q => q
-				.GroupedOr(["nodeName"], terms), BooleanOperation.Or);
-			}
+                query!.And().Group(q => q
+                    .GroupedOr(["metaTitle"], terms.Boost(80))
+                    .Or()
+                    .GroupedOr(["nodeName"], terms.Boost(70))
+                    .Or()
+                    .GroupedOr(["metaTitle"], terms.Fuzzy())
+                    .Or()
+                    .GroupedOr(["metaTitle"], terms.MultipleCharacterWildcard())
+                    .Or()
+                    .GroupedOr(["nodeName"], terms.Fuzzy())
+                    .Or()
+                    .GroupedOr(["nodeName"], terms.MultipleCharacterWildcard())
+                    .Or()
+                    .GroupedOr(["metaDescription"], terms.Boost(50))
+                    .Or()
+                    .GroupedOr(["headerContent"], terms.Boost(40))
+                    .Or()
+                    .GroupedOr(["mainContent"], terms.Boost(40)
+
+                    ), BooleanOperation.Or);
+            }
 
 			ISearchResults? pageOfResults = query.Execute(new QueryOptions(searchRequest.Skip, searchRequest.PageSize));
 
 			return new SearchResponseModel(searchRequest.Query, pageOfResults.TotalItemCount, pageOfResults);
-
-
 		}
 	}
 }

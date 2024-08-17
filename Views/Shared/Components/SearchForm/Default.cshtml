@@ -1,0 +1,15 @@
+﻿@inherits UmbracoViewPage<SearchRequestModel>
+@using SiteWeb.Models.Recherche
+
+<form method="get" action="" class="mb-5">
+
+        <qc-recherche 
+            id="query"
+            name="query" 
+            value="@Model?.Query"
+            placeholder="Rechercher dans ce site"
+            label="Rechercher"
+            variant="light"
+        >
+        </qc-recherche>
+</form>

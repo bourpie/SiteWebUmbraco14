@@ -1,0 +1,26 @@
+﻿@inherits UmbracoViewPage<SearchResponseModel>
+@using SiteWeb.Models.Recherche
+
+<p>Total : @Model?.TotalResultCount</p>
+
+@if (Model?.HasResults ?? false)
+{
+	var itemCount = 0;
+	<ul>
+		@foreach (var item in Model?.SearchResults)
+		{
+			
+			var contentItem = Umbraco.Content(item.Id);
+			if (contentItem == null) continue;
+			<li>
+				<a href="@contentItem.Url()">@contentItem.Name</a>
+				<div>
+					@if (contentItem is MetadonneesProps seo)
+					{
+						<p>@seo.Description</p>
+					}
+				</div>
+			</li>
+		}
+	</ul>
+}

@@ -17,6 +17,7 @@
 
   <ItemGroup>
     <Folder Include="Models\Generated\" />
+    <Folder Include="Views\Shared\Components\Pagination\" />
   </ItemGroup>
 
   <PropertyGroup>

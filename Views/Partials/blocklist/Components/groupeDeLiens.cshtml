@@ -8,7 +8,7 @@
 
     var lienPrincipalEstActif = content?.Lien != null && content.Lien.Url == urlActif;
 }
-
+<nav>
 @if (content?.Lien != null && !string.IsNullOrEmpty(content.Lien.Name))
 {
     <h3>
@@ -33,3 +33,4 @@
         }
     </ul>
 }
+</nav>

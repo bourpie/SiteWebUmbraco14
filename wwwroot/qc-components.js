@@ -136,7 +136,7 @@ function p() {
 }
 class m extends HTMLElement {
   static get observedAttributes() {
-    return ["placeholder", "class", "label", "btnlabel", "variant", "action"];
+    return ["placeholder", "class", "label", "btnlabel", "variant", "action", "id", "name", "value"];
   }
   constructor() {
     super(), this.uuid = `input-${p()}`, this.render();
@@ -148,13 +148,20 @@ class m extends HTMLElement {
     return `
       <form method="get" action="${this.action}" class="container">
         <div class="input-group">
-          <label for="${this.uuid}" class="visually-hidden">${this.label}</label>
-          <input id="${this.uuid}" type="text" placeholder="${this.placeholder}" class="form-control search-input" />
+          <label for="${this.inputId}" class="visually-hidden">${this.label}</label>
+          <input 
+            id="${this.inputId}" 
+            name="${this.inputName}"
+            type="text" 
+            placeholder="${this.placeholder}" 
+            class="form-control search-input" 
+            value="${this.inputValue}" 
+          />
           <button type="button" aria-label="Effacer" class="clear-btn"><span class="lnr lnr-cross"></span></button>
           <span class="input-group-btn">
-              <button aria-label="${this.btnlabel}" class="btn-search">
+            <button aria-label="${this.btnlabel}" class="btn-search">
               ${this.variant === "dark" ? `<img src="${g}" alt="Rechercher" width="24" height="24" />` : `<img src="${u}" alt="Rechercher" width="24" height="24" />`}
-              </button>
+            </button>
           </span> 
         </div>
       </form>
@@ -175,11 +182,21 @@ class m extends HTMLElement {
   get action() {
     return this.getAttribute("action") || "/";
   }
+  get inputId() {
+    return this.getAttribute("id") || this.uuid;
+  }
+  get inputName() {
+    return this.getAttribute("name") || "";
+  }
+  get inputValue() {
+    return this.getAttribute("value") || "";
+  }
   connectedCallback() {
     this.querySelector(".clear-btn").addEventListener("click", this.clearInput.bind(this));
   }
   clearInput() {
-    this.querySelector("input").value = "", this.querySelector(".search-input").focus();
+    const e = this.querySelector("input");
+    e.value = "", e.focus();
   }
   render() {
     this.innerHTML = this.template;
@@ -189,7 +206,7 @@ customElements.get("qc-recherche") || customElements.define("qc-recherche", m);
 const b = "data:image/svg+xml,%3csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%20463.55%2091'%3e%3cdefs%3e%3cstyle%3e.cls-1,.cls-2{fill:%23fff;}.cls-2{fill-rule:evenodd;}%3c/style%3e%3c/defs%3e%3ctitle%3eFichier%201%3c/title%3e%3cg%20id='Calque_2'%20data-name='Calque%202'%3e%3cg%20id='Signature'%3e%3cpath%20class='cls-1'%20d='M125.22,62.89V24.11h-.29c-1.38,1.27-6.48,1.37-8.64,1.37h-3.75v.31c4.33,2.66,3.74,6.59,3.74,11.48V53.68c0,8.21-8.06,14-14.56,14-8.56,0-12.11-6.08-12.11-15.89V24.11h-.3c-1.38,1.27-6.51,1.37-8.67,1.37H76.94v.32c4.33,2.66,3.74,6.58,3.74,11.47V53.63c0,15,6.49,22.08,18.1,22.08,6.89,0,14-2.44,17.51-8.28v7.08H129v-.32C124.63,71.74,125.22,67.79,125.22,62.89Z'/%3e%3cpath%20class='cls-1'%20d='M144.88,42.15c1.18-6.66,6.1-10.89,12.7-10.89,7.09,0,11.61,3.49,12.7,10.89Zm35.74,6.18c.39-13.68-8.77-24-22.16-24-14.66,0-24.6,10.64-24.6,25.4s11.51,26.21,28.25,26.21a33.26,33.26,0,0,0,13.58-2.64l4.93-10h-.3A24.65,24.65,0,0,1,164.17,69c-11.12,0-19.49-7.59-19.68-20.65Z'/%3e%3cpath%20class='cls-1'%20d='M188.42,1.58c2.36,0,7.17-.15,8.63-1.58h.29V67.17a30.3,30.3,0,0,0,8.12,1.27c10.75,0,16.92-7.53,16.92-18,0-10.28-4.8-18.23-14.67-18.23a15.91,15.91,0,0,0-8.22,2.33l5.28-9a19.53,19.53,0,0,1,6.95-1.17c11.15,0,20.63,9.68,20.63,24.2,0,16.63-11.25,27.39-29,27.39-6.65,0-13-1.18-17.85-1.92v-.33c3.25-1.49,3-5,3-8.51V16.33c0-4.91.59-11.77-3.64-14.43V1.58Z'/%3e%3cpath%20class='cls-1'%20d='M249.83,42.15c1.18-6.66,6.1-10.89,12.7-10.89,7.09,0,11.61,3.49,12.7,10.89Zm35.73,6.18c.4-13.68-8.76-24-22.15-24-14.66,0-24.6,10.64-24.6,25.4s11.51,26.21,28.24,26.21a33.27,33.27,0,0,0,13.59-2.64l4.92-10h-.29A24.65,24.65,0,0,1,269.12,69c-11.12,0-19.49-7.59-19.69-20.65Z'/%3e%3cpath%20class='cls-1'%20d='M329.59,36.49h-.3c-2.85-3.52-7.58-5.23-12-5.23-9.55,0-16.43,7.25-16.43,17.37,0,12.25,9.54,20.35,20.47,20.35a24.18,24.18,0,0,0,14.37-5.22h.3l-5.12,10.06a34.32,34.32,0,0,1-13,2.11c-15.15,0-27-10.68-27-24.53,0-18.32,13.22-27.08,28.09-27.08a45.37,45.37,0,0,1,10.63,1.26Z'/%3e%3cpath%20class='cls-2'%20d='M168.33,15.53V4.87c-6.45,2.89-12.44,8.3-16.44,13.56v4.15C161.47,16.13,168.33,15.83,168.33,15.53Z'/%3e%3cpath%20class='cls-1'%20d='M36.43,68.6c-14.87,0-25.21-16.77-25.21-31,0-.14,0-1.46,0-1.6.18-13.8,9.12-26.75,24.71-26.75,16.4,0,24.86,15.52,25,30.23V41C60.94,56.66,51.2,68.6,36.43,68.6ZM87.38,84.9c-11,1.79-21.53-1.66-32.74-14.49,10.83-5.44,17.53-19,17.53-31.55V37.29C72,15.77,55.8,1.56,36.53,1.56S.15,16.35,0,38V39.5C0,60.6,15.66,76.27,34.85,76.27a34.32,34.32,0,0,0,8.08-1.07C55.5,87,66.71,92,76.39,90.83c4.59-.55,9.45-2.38,12.36-6.16Z'/%3e%3cpath%20class='cls-1'%20d='M375.65,27.17c-3,.95-3-1.75-3-1.75,2.68.47,2.94-1.78,2.94-1.78h-5.35V21.12h2.54s-.43-3.36-2.92-3.36c-2.29,0-2.61,2.54-2.19,3.59-1.15.2-2.83-1.79-2.83-4.13a4.45,4.45,0,0,1,4.45-4.57c3.37,0,5.89,3.89,5.89,8.47h1a15.1,15.1,0,0,0-.24-4.22c-.72-3.17-2.3-5-2.33-7.19-.06-3.73,2.19-4.33,4-7.59,1.8,3.26,4.05,3.86,4,7.59,0,2.15-1.61,4-2.34,7.19a14.89,14.89,0,0,0-.23,4.22h1c0-4.58,2.53-8.47,5.9-8.47a4.45,4.45,0,0,1,4.45,4.57c0,2.34-1.68,4.33-2.83,4.13.42-1.05.1-3.59-2.2-3.59-2.48,0-2.91,3.36-2.91,3.36H385v2.52h-5.34s.26,2.25,2.94,1.78c0,0,0,2.7-3.05,1.75,0,0-.12,2.41-1.93,3.28C375.77,29.58,375.65,27.17,375.65,27.17ZM401.57,1.59h-48V31h48Z'/%3e%3cpath%20class='cls-1'%20d='M437.63,27.17c-3,.95-3.05-1.75-3.05-1.75,2.67.47,2.94-1.78,2.94-1.78h-5.34V21.12h2.53s-.43-3.36-2.92-3.36c-2.29,0-2.61,2.54-2.19,3.59-1.15.2-2.83-1.79-2.83-4.13a4.45,4.45,0,0,1,4.45-4.57c3.37,0,5.9,3.89,5.9,8.47h1a14.89,14.89,0,0,0-.23-4.22c-.73-3.17-2.3-5-2.34-7.19-.06-3.73,2.19-4.33,4-7.59,1.79,3.26,4.05,3.86,4,7.59,0,2.15-1.6,4-2.32,7.19a15.31,15.31,0,0,0-.25,4.22h1c0-4.58,2.52-8.47,5.89-8.47a4.45,4.45,0,0,1,4.45,4.57c0,2.34-1.68,4.33-2.83,4.13.42-1.05.1-3.59-2.19-3.59-2.49,0-2.92,3.36-2.92,3.36h2.53v2.52H441.6s.26,2.25,2.94,1.78c0,0,0,2.7-3.05,1.75,0,0-.12,2.41-1.93,3.28C437.75,29.58,437.63,27.17,437.63,27.17ZM463.55,1.59h-48V31h48Z'/%3e%3cpath%20class='cls-1'%20d='M375.65,70.63c-3,1-3-1.75-3-1.75,2.68.48,2.94-1.78,2.94-1.78h-5.35V64.58h2.54s-.43-3.36-2.92-3.36c-2.29,0-2.61,2.54-2.19,3.6-1.15.19-2.83-1.8-2.83-4.14a4.45,4.45,0,0,1,4.45-4.57c3.37,0,5.89,3.89,5.89,8.47h1a15.1,15.1,0,0,0-.24-4.22c-.72-3.16-2.3-5-2.33-7.18-.06-3.74,2.19-4.34,4-7.6,1.8,3.26,4.05,3.86,4,7.6,0,2.14-1.61,4-2.34,7.18a14.89,14.89,0,0,0-.23,4.22h1c0-4.58,2.53-8.47,5.9-8.47a4.45,4.45,0,0,1,4.45,4.57c0,2.34-1.68,4.33-2.83,4.14.42-1.06.1-3.6-2.2-3.6-2.48,0-2.91,3.36-2.91,3.36H385V67.1h-5.34s.26,2.26,2.94,1.78c0,0,0,2.7-3.05,1.75,0,0-.12,2.41-1.93,3.28C375.77,73,375.65,70.63,375.65,70.63Zm25.92-25.57h-48v29.4h48Z'/%3e%3cpath%20class='cls-1'%20d='M437.63,70.63c-3,1-3.05-1.75-3.05-1.75,2.67.48,2.94-1.78,2.94-1.78h-5.34V64.58h2.53s-.43-3.36-2.92-3.36c-2.29,0-2.61,2.54-2.19,3.6-1.15.19-2.83-1.8-2.83-4.14a4.45,4.45,0,0,1,4.45-4.57c3.37,0,5.9,3.89,5.9,8.47h1a14.89,14.89,0,0,0-.23-4.22c-.73-3.16-2.3-5-2.34-7.18-.06-3.74,2.19-4.34,4-7.6,1.79,3.26,4.05,3.86,4,7.6,0,2.14-1.6,4-2.32,7.18a15.31,15.31,0,0,0-.25,4.22h1c0-4.58,2.52-8.47,5.89-8.47a4.45,4.45,0,0,1,4.45,4.57c0,2.34-1.68,4.33-2.83,4.14.42-1.06.1-3.6-2.19-3.6-2.49,0-2.92,3.36-2.92,3.36h2.53V67.1H441.6s.26,2.26,2.94,1.78c0,0,0,2.7-3.05,1.75,0,0-.12,2.41-1.93,3.28C437.75,73,437.63,70.63,437.63,70.63Zm25.92-25.57h-48v29.4h48Z'/%3e%3c/g%3e%3c/g%3e%3c/svg%3e", v = "data:image/svg+xml,%3csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%2052.67%2052.21'%3e%3cdefs%3e%3cstyle%3e.cls-1{fill:%23fff;}%3c/style%3e%3c/defs%3e%3ctitle%3eFichier%201%3c/title%3e%3cg%20id='Calque_2'%20data-name='Calque%202'%3e%3cg%20id='Calque_1-2'%20data-name='Calque%201'%3e%3cpath%20class='cls-1'%20d='M52.67,47.81l-15-15a20.77,20.77,0,1,0-4.32,4.46L48.28,52.21ZM20.78,35.36A14.41,14.41,0,1,1,35.19,21h0A14.43,14.43,0,0,1,20.78,35.36Z'/%3e%3c/g%3e%3c/g%3e%3c/svg%3e";
 class f extends HTMLElement {
   static get observedAttributes() {
-    return ["titre", "class", "btnlabel", "contacturl", "contactlabel", "recherche", "langueurl", "languelabel", "action"];
+    return ["titre", "class", "btnlabel", "contacturl", "contactlabel", "recherche", "langueurl", "languelabel", "action", "name", "query"];
   }
   constructor() {
     super(), this.render();
@@ -217,7 +234,7 @@ class f extends HTMLElement {
                         </ul>
                     </nav>
                 </div>
-                ${this.recherche === "oui" ? `<qc-recherche variant="dark" action="${this.action}"></qc-recherche>` : ""}
+                ${this.recherche === "oui" ? `<qc-recherche variant="dark" action="${this.action}" name="${this.name}" value="${this.query}"></qc-recherche>` : ""}
             </header>
         `;
   }
@@ -248,6 +265,12 @@ class f extends HTMLElement {
   get action() {
     return this.getAttribute("action") || "/";
   }
+  get name() {
+    return this.getAttribute("name") || "search";
+  }
+  get query() {
+    return this.getAttribute("query") || "";
+  }
   render() {
     this.innerHTML = this.template;
     const e = this.querySelector(".btn-search");
@@ -256,7 +279,7 @@ class f extends HTMLElement {
     }), this.recherche === "oui") {
       const s = this.querySelector("qc-recherche");
       if (s) {
-        s.setAttribute("action", this.action);
+        s.setAttribute("action", this.action), s.setAttribute("name", this.name), s.setAttribute("value", this.query);
         const t = s.querySelector("input");
         t && t.focus();
       }
@@ -264,7 +287,7 @@ class f extends HTMLElement {
   }
   updateSearchAction() {
     const e = this.querySelector("qc-recherche");
-    e && e.setAttribute("action", this.action);
+    e && (e.setAttribute("action", this.action), e.setAttribute("name", this.name), e.setAttribute("value", this.query));
   }
 }
 customElements.get("qc-header") || customElements.define("qc-header", f);
