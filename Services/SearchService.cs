@@ -5,7 +5,6 @@ using SiteWeb.Extensions;
 using SiteWeb.Models.Recherche;
 using Umbraco.Cms.Infrastructure.Examine;
 using Umbraco.Cms.Web.Common.PublishedModels;
-using UmbracoConstants = Umbraco.Cms.Core.Constants;
 
 namespace SiteWeb.Services
 {
