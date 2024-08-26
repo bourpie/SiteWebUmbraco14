@@ -20,7 +20,7 @@ namespace Umbraco.Cms.Web.Common.PublishedModels
 {
 	/// <summary>Accueil</summary>
 	[PublishedModel("accueil")]
-	public partial class Accueil : PublishedContentModel, IContenuProps, IEtiquettageProps, IMetadonneesProps, ITitreProps, IVisibilite
+	public partial class Accueil : PublishedContentModel, IMetadonneesProps, ITitreProps, IVisibilite
 	{
 		// helpers
 #pragma warning disable 0109 // new is redundant
@@ -55,15 +55,15 @@ namespace Umbraco.Cms.Web.Common.PublishedModels
 		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder.Embedded", "14.1.1+eb4fc97")]
 		[global::System.Diagnostics.CodeAnalysis.MaybeNull]
 		[ImplementPropertyType("contenu")]
-		public virtual string Contenu => global::Umbraco.Cms.Web.Common.PublishedModels.ContenuProps.GetContenu(this, _publishedValueFallback);
+		public virtual global::Umbraco.Cms.Core.Models.Blocks.BlockListModel Contenu => this.Value<global::Umbraco.Cms.Core.Models.Blocks.BlockListModel>(_publishedValueFallback, "contenu");
 
 		///<summary>
 		/// Étiquettes
 		///</summary>
 		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder.Embedded", "14.1.1+eb4fc97")]
 		[global::System.Diagnostics.CodeAnalysis.MaybeNull]
-		[ImplementPropertyType("pageTags")]
-		public virtual global::System.Collections.Generic.IEnumerable<global::Umbraco.Cms.Core.Models.PublishedContent.IPublishedContent> PageTags => global::Umbraco.Cms.Web.Common.PublishedModels.EtiquettageProps.GetPageTags(this, _publishedValueFallback);
+		[ImplementPropertyType("etiquettes")]
+		public virtual global::System.Collections.Generic.IEnumerable<string> Etiquettes => this.Value<global::System.Collections.Generic.IEnumerable<string>>(_publishedValueFallback, "etiquettes");
 
 		///<summary>
 		/// Description

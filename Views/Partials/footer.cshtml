@@ -6,17 +6,17 @@
     if (preferences is null) return;
 }
 
-   <qc-footer 
-        site-url="https://www.quebec.ca"
-        site-nom="Gouvernement du Québec"
-    >
-        <div slot="liens-principaux">
+<qc-footer 
+    site-url="https://www.quebec.ca"
+    site-nom="Gouvernement du Québec"
+>
+    <div slot="liens-principaux">
         @Html.GetBlockListHtml(preferences, "PiedBlocLiensPrincipaux")
-        </div>
-        <div slot="liens-secondaires">
+    </div>
+    <div slot="liens-secondaires">
         @Html.GetBlockListHtml(preferences, "PiedLiensSecondaires")
-        </div>
-        <div slot="copyright">
+    </div>
+    <div slot="copyright">
         <a href="@preferences?.PiedCopyright?.Url">@preferences?.PiedCopyright?.Name</a>
-        </div>
-    </qc-footer>
+    </div>
+</qc-footer>

@@ -1,0 +1,84 @@
+﻿@inherits UmbracoViewPage
+@using ContentModels = Umbraco.Cms.Web.Common.PublishedModels
+
+@{
+    // Trouver le grand-parent de la page actuelle
+    IPublishedContent grandParent = Model.AncestorOrSelf(2); // 2 niveaux au-dessus de la page actuelle
+    IEnumerable<IPublishedContent> children = null;
+
+    // Vérifier que le grand-parent a été trouvé
+    if (grandParent != null)
+    {
+        children = grandParent.Children.Where(x => !x.Value<bool>("umbracoNaviHide") && x.ContentType.Alias == "page");
+    }
+}
+
+<nav aria-label="Navigation secondaire" class="menu-secondaire">
+    @if (grandParent != null && children != null)
+    {
+        <h2 class="h6">@grandParent.Name</h2>
+        <ul>
+            @foreach (var child in children)
+            {
+                <li>
+                    @{
+                        RenderLinks(child);
+                        GetChildren(child);
+                    }
+                </li>
+            }
+        </ul>
+    }
+    else
+    {
+        <p>Aucun contenu à afficher.</p>
+    }
+</nav>
+
+@functions {
+    private void RenderLinks(IPublishedContent child)
+    {
+        bool isActive = child.IsAncestorOrSelf(Model);
+        bool hasChildren = child.Children.Any(x => !x.Value<bool>("umbracoNaviHide") && x.ContentType.Alias == "page");
+
+        if (hasChildren)
+        {
+            // Lien avec la logique collapse et le chevron de Bootstrap
+            <a class="tree-item position-relative @(isActive ? "active" : null)"
+               href="#child-@(child.Id)"
+               data-bs-toggle="collapse"
+               aria-expanded="@(isActive ? "true" : "false")"
+               aria-controls="child-@(child.Id)"
+            @(isActive ? "aria-current=page" : null)>
+                <span>@(child.Name)</span>
+            </a>
+        }
+        else
+        {
+            // Lien simple sans la logique collapse
+            <a class="tree-item position-relative @(isActive ? "active" : null)"
+               href="@child.Url()"
+            @(isActive ? "aria-current=page" : null)>
+                @(child.Name)
+            </a>
+        }
+    }
+
+    private void GetChildren(IPublishedContent child)
+    {
+        if (child.Children.Any(x => !x.Value<bool>("umbracoNaviHide") && x.ContentType.Alias == "page"))
+        {
+            <ul class="tree-group collapse @(child.IsAncestorOrSelf(Model) ? "show" : string.Empty)" id="child-@(child.Id)">
+                @foreach (var grandChild in child.Children.Where(x => !x.Value<bool>("umbracoNaviHide") && x.ContentType.Alias == "page"))
+                {
+                    <li>
+                        @{
+                            RenderLinks(grandChild);
+                            GetChildren(grandChild);
+                        }
+                    </li>
+                }
+            </ul>
+        }
+    }
+}

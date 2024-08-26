@@ -1,22 +1,34 @@
-﻿@{ 
+﻿@{
     Layout = null;
-
     var currentCulture = Thread.CurrentThread.CurrentCulture;
     var language = currentCulture.Name;
-
 }
 <!DOCTYPE html>
 <html lang="@language">
 <head>
-	<partial name="Head" model="Model"/>
+    <partial name="Head" model="Model" />
 </head>
 <body>
-	<partial name="header" />
-	<partial name="filAriane"/>
-    <main>
+    <partial name="header" />
+    <partial name="filAriane" />
+    <main id="app">
         @RenderBody()
+
     </main>
- 	<partial name="footer"/>
-    <qc-up></qc-up>
+    <partial name="footer" />
+
+    <!-- Inclure Vue.js -->
+    <script src="https://cdn.jsdelivr.net/npm/vue@3/dist/vue.global.js"></script>
+    <script src="~/vite/dist/my-vue-library.umd.js"></script>
+
+    <script>
+        const { GumInfobulle, Feuille, GumTextePiv, GumMotDePassePiv } = MyVueLibrary;
+        const app = Vue.createApp({});
+        app.component('gum-infobulle', GumInfobulle);
+        app.component('feuille', Feuille);
+        app.component('gum-texte-piv', GumTextePiv);
+        app.component('gum-mot-de-passe-piv', GumMotDePassePiv);
+        app.mount('#app');
+    </script>
 </body>
 </html>

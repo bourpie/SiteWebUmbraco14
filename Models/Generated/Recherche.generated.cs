@@ -20,7 +20,7 @@ namespace Umbraco.Cms.Web.Common.PublishedModels
 {
 	/// <summary>Recherche</summary>
 	[PublishedModel("recherche")]
-	public partial class Recherche : PublishedContentModel, IContenuProps, IEtiquettageProps, IMetadonneesProps, IVisibilite
+	public partial class Recherche : PublishedContentModel, IContenuProps, IMetadonneesProps, IVisibilite
 	{
 		// helpers
 #pragma warning disable 0109 // new is redundant
@@ -55,15 +55,7 @@ namespace Umbraco.Cms.Web.Common.PublishedModels
 		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder.Embedded", "14.1.1+eb4fc97")]
 		[global::System.Diagnostics.CodeAnalysis.MaybeNull]
 		[ImplementPropertyType("contenu")]
-		public virtual string Contenu => global::Umbraco.Cms.Web.Common.PublishedModels.ContenuProps.GetContenu(this, _publishedValueFallback);
-
-		///<summary>
-		/// Étiquettes
-		///</summary>
-		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder.Embedded", "14.1.1+eb4fc97")]
-		[global::System.Diagnostics.CodeAnalysis.MaybeNull]
-		[ImplementPropertyType("pageTags")]
-		public virtual global::System.Collections.Generic.IEnumerable<global::Umbraco.Cms.Core.Models.PublishedContent.IPublishedContent> PageTags => global::Umbraco.Cms.Web.Common.PublishedModels.EtiquettageProps.GetPageTags(this, _publishedValueFallback);
+		public virtual global::Umbraco.Cms.Core.Models.Blocks.BlockListModel Contenu => global::Umbraco.Cms.Web.Common.PublishedModels.ContenuProps.GetContenu(this, _publishedValueFallback);
 
 		///<summary>
 		/// Description

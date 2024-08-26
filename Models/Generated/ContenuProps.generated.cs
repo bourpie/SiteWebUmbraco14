@@ -25,7 +25,7 @@ namespace Umbraco.Cms.Web.Common.PublishedModels
 		/// <summary>Contenu</summary>
 		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder.Embedded", "14.1.1+eb4fc97")]
 		[global::System.Diagnostics.CodeAnalysis.MaybeNull]
-		string Contenu { get; }
+		global::Umbraco.Cms.Core.Models.Blocks.BlockListModel Contenu { get; }
 	}
 
 	/// <summary>Contenu</summary>
@@ -65,11 +65,11 @@ namespace Umbraco.Cms.Web.Common.PublishedModels
 		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder.Embedded", "14.1.1+eb4fc97")]
 		[global::System.Diagnostics.CodeAnalysis.MaybeNull]
 		[ImplementPropertyType("contenu")]
-		public virtual string Contenu => GetContenu(this, _publishedValueFallback);
+		public virtual global::Umbraco.Cms.Core.Models.Blocks.BlockListModel Contenu => GetContenu(this, _publishedValueFallback);
 
 		/// <summary>Static getter for Contenu</summary>
 		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder.Embedded", "14.1.1+eb4fc97")]
 		[return: global::System.Diagnostics.CodeAnalysis.MaybeNull]
-		public static string GetContenu(IContenuProps that, IPublishedValueFallback publishedValueFallback) => that.Value<string>(publishedValueFallback, "contenu");
+		public static global::Umbraco.Cms.Core.Models.Blocks.BlockListModel GetContenu(IContenuProps that, IPublishedValueFallback publishedValueFallback) => that.Value<global::Umbraco.Cms.Core.Models.Blocks.BlockListModel>(publishedValueFallback, "contenu");
 	}
 }

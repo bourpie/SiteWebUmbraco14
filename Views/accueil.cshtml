@@ -1,5 +1,5 @@
 ﻿@using Umbraco.Cms.Web.Common.PublishedModels;
-@inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage
+@inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage<Accueil>
 @{
 	Layout = "master.cshtml";
 }
@@ -8,6 +8,8 @@
 		<div class="col">
 
 			<h1 class="h1">@Model.Name</h1>
+
+			@Html.GetBlockListHtml(Model.Contenu)
 		</div>
 	</div>
 </div>
