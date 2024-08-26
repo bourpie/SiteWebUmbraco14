@@ -58,10 +58,10 @@ qc-footer {
     padding: .5rem 0;
 }
 
-    .menu-secondaire > ul > li > ul > li:last-child > a.tree-item,
-    .menu-secondaire > ul > li > ul > li > ul > li:last-child > a.tree-item {
-        padding-bottom: 1rem;
-    }
+.menu-secondaire > ul > li > ul > li:last-child > a.tree-item,
+.menu-secondaire > ul > li > ul > li > ul > li:last-child > a.tree-item {
+    padding-bottom: 1rem;
+}
 
 .menu-secondaire > ul > li:last-child > a.tree-item {
    border-bottom:none;
@@ -97,14 +97,10 @@ qc-footer {
     padding-top: 0;
 }
 
-    .menu-secondaire ul ul > li > ul > li:before {
-        content: "\2014";
-        color: rgb(9, 87, 151);
+.menu-secondaire ul ul > li > ul > li:before {
+    content: "\2014";
+    color: rgb(9, 87, 151);
        
-    }
-
-.menu-secondaire ul ul > li > ul > li > a{
-    
 }
 
 .tree-item[aria-expanded]::after {
