@@ -1,0 +1,29 @@
+﻿@inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage
+@using Umbraco.Cms.Core.Security
+@using Umbraco.Cms.Web.Common.Security
+@inject IMemberSignInManager _signInManager
+
+<h2>Connexion</h2>
+
+@if (User.Identity.IsAuthenticated)
+{
+    <form asp-controller="Member" asp-action="Logout" method="post">
+        @Html.AntiForgeryToken()
+        <button type="submit">Déconnexion</button>
+    </form>
+}
+
+else
+{
+    <form method="post" asp-controller="Member" asp-action="Login">
+        <div>
+            <label for="Username">Nom d'utilisateur</label>
+            <input type="text" id="Username" name="Username" required />
+        </div>
+        <div>
+            <label for="Password">Mot de passe</label>
+            <input type="password" id="Password" name="Password" required />
+        </div>
+        <button type="submit">Se connecter</button>
+    </form>
+}
