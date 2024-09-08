@@ -1,28 +1,34 @@
 ﻿@inherits UmbracoViewPage<SearchResponseModel>
 @using SiteWeb.Models.Recherche
 
-<p>Total : @Model?.TotalResultCount</p>
+@{
+    var query = Context?.Request.Query["query"].ToString();
+}
+
+@if (!string.IsNullOrWhiteSpace(query))
+{
+    <p>Total : @Model?.TotalResultCount</p>
+}
 
 @if (Model?.HasResults ?? false)
 {
-	var itemCount = 0;
-	<ul>
-		@foreach (var item in Model?.SearchResults)
-		{
-			
-			var contentItem = Umbraco.Content(item.Id);
-			if (contentItem == null) continue;
-			<li>
-				<a href="@contentItem.Url()">@contentItem.Name</a>
-				<div>
-					@if (contentItem is MetadonneesProps seo)
-					{
-						<p>@seo.Description</p>
-					}
-				</div>
-			</li>
+    var itemCount = 0;
+    <ul>
+        @foreach (var item in Model?.SearchResults)
+        {
+            var contentItem = Umbraco.Content(item.Id);
+            if (contentItem == null) continue;
+            <li>
+                <a href="@contentItem.Url()">@contentItem.Name</a>
+                <div>
+                    @if (contentItem is MetadonneesProps seo)
+                    {
+                        <p>@seo.Description</p>
+                    }
+                </div>
+            </li>
 
-			itemCount++;
-		}
-	</ul>
+            itemCount++;
+        }
+    </ul>
 }

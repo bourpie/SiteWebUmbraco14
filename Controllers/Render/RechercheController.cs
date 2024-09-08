@@ -50,7 +50,7 @@ namespace SiteWeb.Controllers.Render
                 return CurrentTemplate(emptyModel);
             }
 
-            var pageSize = 1;
+            var pageSize = 10;
 
             var searchRequest = new SearchRequestModel(query, page, pageSize);
 
